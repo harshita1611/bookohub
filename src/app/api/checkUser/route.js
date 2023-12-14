@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request, response) {
     try {
 
-        const {email,id,name} = request.body;
+        const {email,id,name} = request.json();
         const conn = await client.connect();
         const db = conn.db('bookohub');
         const user=await db.collection("users").findOne({email:email});

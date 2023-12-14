@@ -29,6 +29,9 @@ export default function Home() {
             <h1>Home</h1>
             <UserButton afterSignOutUrl="/"/>
             <button>Get Started</button>
+            <div>
+                user: {user ? user.id : "no user"}
+            </div>
         </div>    
     )
 }

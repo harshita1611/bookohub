@@ -6,9 +6,7 @@ export async function POST(request,response){
     try{
         console.log(request.body)
         const res=await request.json()
-        console.log(res,"ressss");
         const {title,price,owner,image}=res;
-        console.log(owner,"owner")
         // console.log(title,price,owner,image,"lendBook");
         const conn=await client.connect();
         const db=conn.db('bookohub');

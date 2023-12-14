@@ -35,6 +35,7 @@ export default function RentBooks(){
         .then(res=>{
             console.log(res)
         })
+        alert("Book Uploaded")
     }
 
     const uploadBook=(e)=>{
@@ -47,7 +48,6 @@ export default function RentBooks(){
     }
 
     const getFormData=(e)=>{
-        // e.preventDefault();
         console.log("Worked ?")
         console.log(title.current.value,price.current.value,image)
         postImage();
