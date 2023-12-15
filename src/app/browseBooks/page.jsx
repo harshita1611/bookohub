@@ -1,5 +1,7 @@
 "use client"
 import { useEffect,useState } from "react"
+import Navbar from "../components/navbar"
+
 
 export default function BrowseBooks(){
 
@@ -19,6 +21,7 @@ export default function BrowseBooks(){
     const style=""
     return (
         <div className="h-screen bg-blue-400">
+            <Navbar/>
             Book Collections
             <div className="grid grid-cols-5 justify-items-center gap-10 bg--900">
 

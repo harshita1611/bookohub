@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { useEffect, useState,useRef } from "react";
 // import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useUser } from "@clerk/nextjs";
+import Navbar from "../components/navbar"
 
 const poppins=Poppins({subsets:['latin'],
 weight:['400','500','600','700','800','900']})
@@ -18,6 +19,7 @@ export default function RentBooks(){
     const [reader,setReader]=useState()
     const {user} = useUser();
     const postImage=()=>{
+        console.log(title.current.value,price.current.value,"title,price")
         console.log(user.id,"inside postImage")
         fetch('/api/lendBook',{
             method:'POST',
@@ -48,8 +50,10 @@ export default function RentBooks(){
     }
 
     const getFormData=(e)=>{
-        console.log("Worked ?")
-        console.log(title.current.value,price.current.value,image)
+        e.preventDefault();
+        title.current.focus();
+        price.current.focus();        
+        console.log(title.current.focus(),price.current.focus(),"title,price")
         postImage();
     }
 
@@ -59,6 +63,7 @@ export default function RentBooks(){
 
     return (
         <div className={`h-screen bg-blue-400 ${poppins.className} `}>
+            <Navbar/>
             Book Decription
             <form action="" className="flex m-auto bg-white p-5 flex-col w-[500px] gap-5">
                 <div className="font-bold text text-4xl">
