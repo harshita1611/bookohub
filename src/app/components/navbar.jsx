@@ -2,10 +2,11 @@
 import Link from 'next/link'
 import { useUser,UserButton, SignIn } from '@clerk/nextjs'
 import { useEffect,useState } from 'react'
+// import { Button } from '@mui/material'
+import Button from '@mui/material-next/Button';
 
 export default function Navbar(){
 
-    // const [isSignedIn,setIsSignedIn]=useState(false)
 
     const {isLoaded,isSignedIn,user}=useUser()
     console.log(isSignedIn,"isSignedIn")
@@ -16,11 +17,12 @@ export default function Navbar(){
     // })
 
     return (
-        <div className="flex gap-10 font-semibold text-lg justify-around w-screen h-12 items-center">
+        <div className="flex gap-10 font-semibold text-lg justify-around w-screen h-20 items-center">
             <div>
                 Logo
             </div>
             <div className='flex gap-5'>
+              
                 <Link href="/" className="hover:bg-[#1976d2] p-2 py-1 rounded duration-300"> 
                     <button href="/">
                         Home
@@ -43,7 +45,9 @@ export default function Navbar(){
                 (isSignedIn) &&
                 (
                     <div className='flex gap-5 '>
-                        {user.firstName}
+                        <Link href="/profilePage">
+                            {user.firstName}
+                        </Link>
                         <UserButton/>
                     </div>   
                 )                   

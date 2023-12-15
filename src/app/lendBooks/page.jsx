@@ -1,10 +1,8 @@
 "use client"
-import { TextField } from "@mui/material"
+import { TextField,Button } from "@mui/material"
 import { Poppins } from "next/font/google"
-import Button from '@mui/material/Button';
 import { useEffect, useState,useRef } from "react";
-// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { useUser } from "@clerk/nextjs";
+import { SignIn, useUser } from "@clerk/nextjs";
 import Navbar from "../components/navbar"
 
 const poppins=Poppins({subsets:['latin'],
@@ -13,13 +11,14 @@ weight:['400','500','600','700','800','900']})
 
 export default function RentBooks(){
 
-    const title=useRef()
-    const price=useRef()
+    // const title=useRef()
+    const [title,setTitle]=useState()
+    const [price,setPrice]=useState()
+  
     const [image,setImage]=useState()
     const [reader,setReader]=useState()
-    const {user} = useUser();
+    const {isSignedIn,user} = useUser();
     const postImage=()=>{
-        console.log(title.current.value,price.current.value,"title,price")
         console.log(user.id,"inside postImage")
         fetch('/api/lendBook',{
             method:'POST',
@@ -27,8 +26,8 @@ export default function RentBooks(){
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                title:title.current.value,
-                price:price.current.value,
+                title:title,
+                price:price,
                 owner:user.id,
                 image:image
             })
@@ -51,18 +50,22 @@ export default function RentBooks(){
 
     const getFormData=(e)=>{
         e.preventDefault();
-        title.current.focus();
-        price.current.focus();        
-        console.log(title.current.focus(),price.current.focus(),"title,price")
+        // title.current.focus();
+        // price.current.focus();      
+        // console.log(title,price,"title,price,Not current")  
+        // console.log(title,price,"title,price")
         postImage();
     }
+
 
     useEffect(()=>{
         setReader(new FileReader());
     },[])
 
-    return (
-        <div className={`h-screen bg-blue-400 ${poppins.className} `}>
+    if (isSignedIn){
+
+        return (
+            <div className={`h-screen bg-blue-400 ${poppins.className} `}>
             <Navbar/>
             Book Decription
             <form action="" className="flex m-auto bg-white p-5 flex-col w-[500px] gap-5">
@@ -70,10 +73,10 @@ export default function RentBooks(){
                     Rent A Book
                 </div>
                 <div className="flex flex-col gap-2">
-                    <TextField id="title" label="Title" variant="outlined" ref={title}  />
+                    <TextField id="title" label="Title" variant="outlined" onChange={(e)=>{setTitle(e.target.value)}}  />
                 </div>
                 <div className="flex flex-col">
-                    <TextField id="price" label="Price" variant="outlined" ref={price}/>
+                    <TextField id="price" label="Price" variant="outlined" onChange={(e)=>{setPrice(e.target.value)}}  />
                 </div>
                 <div className="flex flex-col">
                     <Button component="label" variant="contained" >
@@ -89,5 +92,11 @@ export default function RentBooks(){
 
             </form>
         </div>
-    )
+    )}
+
+    else{
+        return(
+            <SignIn/>
+        )
+    }
 }
