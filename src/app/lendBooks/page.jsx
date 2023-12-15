@@ -91,6 +91,9 @@ export default function RentBooks(){
                 </div>
 
             </form>
+            <div className="bg-black h-52 w-24 min-[1537px]:bg-pink-600 ">
+
+            </div>
         </div>
     )}
 

@@ -66,7 +66,7 @@ export default function BrowseBooks(){
     return (
         <div className="bg-[#101418] text-gray-200">
             <Navbar/>
-            <div className="flex justify-around pt-12 ">
+            <div className="flex justify-around md:pt-12 ">
 
                 <div className="highLightBooks w-[30%] h-[580px] bg-[#489AC8] rounded-xl text-[#040b0e] p-5">
                     <div className="pb-5 flex">
@@ -89,7 +89,7 @@ export default function BrowseBooks(){
 
                 </div>
                 {/* <iframe src="/lendBooks" title="W3Schools Free Online Web Tutorials"></iframe> */}
-                <div className="grid grid-cols-5 justify-items-center gap-y-32 gap-x-10 overflow-auto ">
+                <div className="grid grid-cols-5 justify-items-center gap-y-32 gap-x-5 min-[1536px]:gap-x-10 overflow-auto ">
 
                     {   
                         books.map(book=>(
