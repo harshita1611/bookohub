@@ -14,10 +14,18 @@ import { IoBookSharp } from "react-icons/io5";
 export default function profilePage() {
     
     const {isSignedIn, user} = useUser()
-    console.log(user,"user")
+    // console.log(user,"user")
     const [books,setBooks]=useState([])
-
+    const [maxId,setMaxId]=useState(4)
+    
     useEffect(() => {
+        const width=window.innerWidth
+        if(width>1919){
+            setMaxId(15)
+        }
+        else if(width>1535){
+            setMaxId(11)
+        }
         fetch("/api/browseAllBooks")
         .then(res => res.json())
         .then(res => {
@@ -38,6 +46,8 @@ export default function profilePage() {
             return title
         }
     }
+    // console.log(window.innerWidth,"width")
+
     const { signOut } = useClerk();
     const router = useRouter()
     if (isSignedIn){
@@ -59,7 +69,7 @@ export default function profilePage() {
                         </div>   
                     )
                 }
-                <div className="flex flex-col p-5 gap-2">
+                <div className="flex flex-col p-5 gap-2 min-[1920px]:gap-">
 
                     <Btn
                         title="Books Borrowed"
@@ -92,7 +102,7 @@ export default function profilePage() {
                         <div className="pl-4 gap-2">
                         {
                             books.map((book,index)=>
-                            (book.owner==user.id) && (index<10)&&
+                            (book.owner==user.id) && (index<maxId)&&
                             (
                                 <div className="flex font-semibold text-[13px] opacity-80">
                                     <li>
