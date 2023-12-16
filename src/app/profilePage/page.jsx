@@ -14,13 +14,13 @@ import { IoBookSharp } from "react-icons/io5";
 export default function profilePage() {
     
     const {isSignedIn, user} = useUser()
-    // console.log(user,"user")
     const [books,setBooks]=useState([])
     const [maxId,setMaxId]=useState(4)
     
     useEffect(() => {
         const width=window.innerWidth
         if(width>1919){
+            setMaxId(18)
             setMaxId(18)
         }
         else if(width>1535){
@@ -99,12 +99,12 @@ export default function profilePage() {
                             onClick={changeDisplay}
                             />
 
-                        <div className="pl-4 gap-2">
+                        <div className="pl-4 min-[1919px]:gap-2 flex flex-col font-semibold text-[13px] opacity-80">
                         {
                             books.map((book,index)=>
                             (book.owner==user.id) && (index<maxId)&&
                             (
-                                <div className="flex font-semibold text-[13px] opacity-80">
+                                <div className="">
                                     <li>
                                         {finalBookTitle(book.title).toUpperCase()}
                                     </li>

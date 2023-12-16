@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
+import NextTopLoader from 'nextjs-toploader'
 const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Create Next App',
@@ -10,10 +11,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-        
-        <html lang="en">
-        <body className={inter.className}>{children}</body>
-        </html>
+            <html lang="en">
+                <NextTopLoader
+                    color="#ff0000"
+                    size="10"
+                    delay={100}
+                    duration={1000}
+                />
+                <body className={inter.className}>
+                    {children}
+                </body>
+            </html>
     </ClerkProvider>
   )
 }
