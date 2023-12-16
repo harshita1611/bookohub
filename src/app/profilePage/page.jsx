@@ -21,7 +21,7 @@ export default function profilePage() {
     useEffect(() => {
         const width=window.innerWidth
         if(width>1919){
-            setMaxId(15)
+            setMaxId(18)
         }
         else if(width>1535){
             setMaxId(11)
@@ -69,7 +69,7 @@ export default function profilePage() {
                         </div>   
                     )
                 }
-                <div className="flex flex-col p-5 gap-2 min-[1920px]:gap-">
+                <div className="flex flex-col p-5 min-[1535]:text-[80%] gap-2">
 
                     <Btn
                         title="Books Borrowed"
