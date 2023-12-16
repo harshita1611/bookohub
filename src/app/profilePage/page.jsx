@@ -3,8 +3,6 @@
 import { useUser,UserButton,SignIn } from "@clerk/nextjs"
 import { useEffect,useState } from "react"
 import Link from 'next/link'
-import { useClerk } from "@clerk/clerk-react";
-import { useRouter } from 'next/navigation'
 import { SiBookstack } from "react-icons/si";
 import { TbBooks,TbBooksOff } from "react-icons/tb";
 import Btn from "../components/button";
@@ -48,8 +46,7 @@ export default function profilePage() {
     }
     // console.log(window.innerWidth,"width")
 
-    const { signOut } = useClerk();
-    const router = useRouter()
+
     if (isSignedIn){
 
         return (
@@ -59,7 +56,7 @@ export default function profilePage() {
                     (isSignedIn) &&
                     (
                         <div className='flex flex-col justify-center items-center '>
-                                <img src={user.imageUrl} onClick={() => signOut(() => router.push("/"))} className="rounded-[100%] p-5" alt="" />
+                                <img src={user.imageUrl}  className="rounded-[100%] p-5" alt="" />
                             <div className="flex gap-5 items-center">
                                 <Link href="/profilePage">
                                     {user.firstName}
@@ -105,7 +102,7 @@ export default function profilePage() {
                             (book.owner==user.id) && (index<maxId)&&
                             (
                                 <div className="">
-                                    <li>
+                                    <li key="{book._id}">
                                         {finalBookTitle(book.title).toUpperCase()}
                                     </li>
                                 </div>
